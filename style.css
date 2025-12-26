@@ -379,7 +379,7 @@ body.mode-work .loading-text,
 .error-text {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.8rem;
-    color: #666;
+    color: var(--muted);
     text-align: center;
     margin: 1rem 0;
 }
@@ -397,7 +397,7 @@ body.mode-work .archive-date {
     font-size: 0.75rem;
     display: block;
     margin-bottom: 0.2rem;
-    color: #666;
+    color: var(--muted);
 }
 
 body.mode-work .archive-item h4 {
@@ -522,7 +522,7 @@ body.mode-work .pub-list li {
 }
 
 body.mode-work .pub-source {
-    color: #666;
+    color: var(--muted);
     font-style: italic;
 }
 
@@ -679,7 +679,7 @@ body.article-page {
     font-weight: 900;
     margin-bottom: 0.5rem;
     line-height: 1.2;
-    color: #000;
+    color: var(--ink);
 }
 
 .paper-meta {
@@ -710,7 +710,7 @@ body.article-page {
     border-bottom: 2px solid #000;
     padding-bottom: 0.2rem;
     break-after: avoid;
-    color: #000;
+    color: var(--ink);
 }
 
 .article-body p {
@@ -742,7 +742,8 @@ body.article-page {
     margin-top: 2rem;
     font-family: 'Courier New', Courier, monospace;
     text-decoration: none;
-    color: #000;
+    color: var(--ink);
+
     border: 1px solid #000;
     padding: 0.5rem 1rem;
     transition: all 0.2s;
@@ -771,6 +772,30 @@ body.article-page {
 /* =========================================
    MODE: FUN (Playful Pastel Theme)
    ========================================= */
+body.mode-fun {
+    --ink: #111;
+    --paper: #fffdf8;
+    --accent: #ffb7b2;
+    --muted: #666;
+}
+
+/* MAGAZINE FRAME */
+body.mode-fun .fun-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+    background: #fffdf8;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Page padding consistency */
+body.mode-fun .parallax-section,
+body.mode-fun .content-section {
+    margin-bottom: 8rem;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
 body.mode-fun {
     --bg-color: #fdf6ec;
     /* Creamy Peach */
@@ -822,17 +847,17 @@ body.mode-fun .issue-date {
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
-    color: #666;
+    color: var(--muted);
 }
 
 body.mode-fun h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 8rem;
+    font-size: clamp(4rem, 8vw, 6rem);
     font-weight: 700;
-    color: #000;
+    color: var(--ink);
     margin: 0;
     letter-spacing: -4px;
-    line-height: 0.8;
+    line-height: 0.95;
     text-transform: uppercase;
 }
 
@@ -898,7 +923,7 @@ body.mode-fun .fun-container {
 .content-section {
     padding: 6rem 15vw;
     /* Content Padding */
-    background: #fff;
+    background: var(--paper);
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -908,7 +933,7 @@ body.mode-fun .fun-container {
 
 /* 1. HERO SECTION */
 .hero-section {
-    background-color: #fff;
+    background: var(--paper);
     /* Clean white hero */
     min-height: 80vh;
 }
@@ -929,7 +954,7 @@ body.mode-fun .fun-container {
 
 .parallax-title {
     font-family: 'Playfair Display', serif;
-    font-size: 6rem;
+    font-size: clamp(3rem, 6vw, 4.5rem);
     color: #fff;
     margin-bottom: 2rem;
     font-style: italic;
@@ -937,8 +962,13 @@ body.mode-fun .fun-container {
 }
 
 .globe-container {
-    width: 100%;
-    height: 600px;
+    max-width: 700px;
+    height: 420px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: radial-gradient(circle, #111 60%, #000 100%);
+    box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.05),
+        0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
 #globe-viz {
@@ -994,8 +1024,8 @@ body.mode-fun .hobbies-list li {
 }
 
 body.mode-fun .hobbies-list li:hover {
-    background: #fff;
-    color: #000;
+    background: var(--paper);
+    color: var(--ink);
     border-color: #fff;
 }
 
@@ -1050,11 +1080,11 @@ body.mode-fun .hobbies-list li:hover {
 
 body.mode-fun h2 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
     color: #1a1a1a;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.15em;
 }
 
 body.mode-fun .card-icon {
@@ -1120,11 +1150,11 @@ body.mode-fun .song-title {
 
 body.mode-fun .artist {
     opacity: 0.7;
-    color: #888;
+    color: var(--muted);
 }
 
 body.mode-fun .action-btn {
-    background: #fff;
+    background: var(--paper);
     border: 2px solid var(--primary-color);
     color: var(--on-primary);
     padding: 0.8rem 1.5rem;
@@ -1422,8 +1452,8 @@ body.mode-work .contact-card p {
 }
 
 .submit-btn:hover {
-    background: #fff;
-    color: #000;
+    background: var(--paper);
+    color: var(--ink);
 }
 
 /* GLOBE MODAL */
@@ -1494,7 +1524,7 @@ body.mode-work .contact-card p {
 
 .music-modal-content h2 {
     font-family: 'Playfair Display', serif;
-    color: #000;
+    color: var(--ink);
     font-size: 2.5rem;
     margin: 0;
     font-weight: 700;
@@ -1532,8 +1562,8 @@ body.mode-work .contact-card p {
 }
 
 .streaming-btn.apple {
-    background: #fff;
-    color: #000;
+    background: var(--paper);
+    color: var(--ink);
     border: 1px solid #000;
 }
 
@@ -1551,4 +1581,25 @@ body.mode-work .contact-card p {
 body.modal-open>*:not(.modal-overlay) {
     filter: blur(5px);
     transition: filter 0.3s ease;
+}
+
+/* ===============================
+   MAGAZINE PAGE STACKING
+   =============================== */
+
+.mag-page {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--paper, #fff);
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mag-page.active {
+    transform: translateX(0);
+}
+
+.mag-page.previous {
+    transform: translateX(-100%);
 }

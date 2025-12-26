@@ -362,3 +362,30 @@ function onParallaxScroll() {
         parallaxTicking = false;
     });
 }
+// MAGAZINE PAGE SLIDE
+const pages = Array.from(document.querySelectorAll('.mag-page'));
+let currentPage = 0;
+
+function updatePages(index) {
+    pages.forEach((page, i) => {
+        page.classList.remove('active', 'previous');
+
+        if (i === index) page.classList.add('active');
+        if (i < index) page.classList.add('previous');
+    });
+}
+
+window.addEventListener('wheel', (e) => {
+    if (!document.body.classList.contains('mode-fun')) return;
+
+    if (e.deltaY > 0 && currentPage < pages.length - 1) {
+        currentPage++;
+    } else if (e.deltaY < 0 && currentPage > 0) {
+        currentPage--;
+    }
+
+    updatePages(currentPage);
+}, { passive: true });
+
+updatePages(0);
+
