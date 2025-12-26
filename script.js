@@ -11,16 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (body.classList.contains('mode-work')) {
             body.classList.remove('mode-work');
             body.classList.add('mode-fun');
-            // Force resize for Globe
+
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
-            }, 100);
+                initParallax(); // 🔥 START PARALLAX
+            }, 150);
+
         } else {
             body.classList.remove('mode-fun');
             body.classList.add('mode-work');
+
+            destroyParallax(); // 🧹 CLEAN RESET
         }
+
         updateButtonText();
     });
+
 
     function updateButtonText() {
         if (body.classList.contains('mode-work')) {
@@ -309,53 +315,50 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // PARALLAX ENGINE
+let parallaxActive = false;
+let parallaxItems = [];
+let parallaxTicking = false;
+
 function initParallax() {
-    const parallaxElements = document.querySelectorAll('[data-parallax]');
-    if (!parallaxElements.length) return;
+    parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
 
-    // Safety Checks
-    const isMobile = window.innerWidth < 768;
+    if (!parallaxItems.length) return;
+
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
 
-    if (isMobile || reducedMotion) {
-        console.log('Parallax disabled: Mobile or Reduced Motion');
-        // Ensure reset
-        parallaxElements.forEach(el => {
-            el.style.transform = 'none';
-        });
-        return;
-    }
+    if (reducedMotion || isMobile) return;
 
-    let ticking = false;
-
-    function update() {
-        const scrollY = window.scrollY;
-
-        parallaxElements.forEach(el => {
-            const speed = parseFloat(el.getAttribute('data-speed')) || 0;
-            const yPos = -(scrollY * speed); // Negative to move against scroll, or positive for with
-
-            // Apply Transform
-            el.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-
-        ticking = false;
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(update);
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Initial call
-    update();
+    parallaxActive = true;
+    window.addEventListener('scroll', onParallaxScroll, { passive: true });
 }
 
-// Initialize on Load
-document.addEventListener('DOMContentLoaded', () => {
-    initParallax();
-});
+function destroyParallax() {
+    parallaxActive = false;
+    window.removeEventListener('scroll', onParallaxScroll);
+
+    parallaxItems.forEach(el => {
+        el.style.transform = 'translate3d(0,0,0)';
+    });
+}
+
+function onParallaxScroll() {
+    if (!parallaxActive || parallaxTicking) return;
+
+    parallaxTicking = true;
+
+    requestAnimationFrame(() => {
+        const vh = window.innerHeight;
+
+        parallaxItems.forEach(el => {
+            const speed = parseFloat(el.dataset.speed || '0.2');
+            const rect = el.getBoundingClientRect();
+            const progress = (rect.top + rect.height) / (vh + rect.height);
+            const offset = (0.5 - progress) * speed * 120;
+
+            el.style.transform = `translate3d(0, ${offset}px, 0)`;
+        });
+
+        parallaxTicking = false;
+    });
+}
