@@ -1,0 +1,1554 @@
+/* Global Vars & Reset */
+:root {
+    --transition-speed: 0.4s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+}
+
+/* =========================================
+   MODE: WORK (Newspaper)
+   ========================================= */
+body.mode-work {
+    --bg-color: #f4f1ea;
+    /* Slightly warmer aesthetic */
+    --text-color: #1a1a1a;
+    --accent-color: #8b0000;
+    /* Deep red for accents */
+    --border-color: #2f2f2f;
+    --header-font: 'Playfair Display', serif;
+    --body-font: 'Merriweather', serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--body-font);
+    line-height: 1.5;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+}
+
+body.mode-work #fun-view {
+    display: none;
+}
+
+/* LAYOUT CONTAINER */
+body.mode-work .view-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    background: #fffdf5 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+    min-height: 100vh;
+}
+
+/* HEADER / MASTHEAD */
+body.mode-work .newspaper-header {
+    text-align: center;
+    border-bottom: 4px double var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+body.mode-work .weather-widget {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.7rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: sans-serif;
+}
+
+body.mode-work .main-headline {
+    font-family: var(--header-font);
+    font-size: 5rem;
+    font-weight: 900;
+    margin: 1rem 0 0.5rem;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+body.mode-work .meta-line {
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+body.mode-work .breaking-news {
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    background: #fffdf5 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 3-COLUMN GRID */
+body.mode-work .newspaper-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    /* 1:2:1 ratio */
+    gap: 2rem;
+    align-items: start;
+}
+
+/* LEFT COLUMN (SIDEBAR) */
+body.mode-work .col-left {
+    border-right: 1px solid #ddd;
+    padding-right: 1rem;
+}
+
+body.mode-work .sidebar-item {
+    margin-bottom: 2rem;
+}
+
+body.mode-work .sidebar-item h3 {
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.2rem;
+}
+
+body.mode-work .sidebar-item p {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+body.mode-work .sidebar-item strong {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+body.mode-work .profile-photo {
+    width: 100%;
+    margin-bottom: 1rem;
+    filter: grayscale(100%) contrast(1.1);
+    border: 1px solid #000;
+}
+
+/* MAIN COLUMN */
+body.mode-work .col-main {
+    padding: 0 1rem;
+}
+
+body.mode-work .article {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+body.mode-work .article-headline {
+    font-family: var(--header-font);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+body.mode-work .article-meta {
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+body.mode-work .article-body {
+    font-size: 1rem;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+body.mode-work .split-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Vertical Divider Line */
+body.mode-work .split-columns::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #ddd;
+    transform: translateX(-50%);
+}
+
+body.mode-work .split-columns p {
+    margin-bottom: 0;
+    text-indent: 0;
+}
+
+body.mode-work .drop-cap {
+    float: left;
+    font-size: 3.5rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+    font-family: var(--header-font);
+    font-weight: 700;
+}
+
+/* RIGHT COLUMN */
+body.mode-work .col-right {
+    border-left: 1px solid #ddd;
+    padding-left: 1rem;
+}
+
+/* SEPARATORS */
+body.mode-work .separator {
+    height: 1px;
+    background: var(--border-color);
+    margin: 1.5rem 0;
+}
+
+body.mode-work .separator-light {
+    height: 1px;
+    background: #ccc;
+    margin: 1.5rem 0;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.mode-work .separator-bold {
+    height: 3px;
+    background: var(--border-color);
+    margin: 1.5rem 0;
+}
+
+/* SECTION TAGS */
+body.mode-work .section-tag {
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* PHOTOS */
+body.mode-work figure {
+    margin: 0 0 1rem 0;
+    width: 100%;
+}
+
+body.mode-work img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%) contrast(1.2);
+    /* Ensure newspaper look */
+    border: 1px solid #ccc;
+}
+
+body.mode-work figcaption {
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    color: #555;
+    margin-top: 0.3rem;
+    font-style: italic;
+    line-height: 1.2;
+}
+
+body.mode-work .editorial-photo img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 0.5rem;
+}
+
+/* MARKET WATCH TABLE */
+body.mode-work .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+}
+
+body.mode-work .skills-table td {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+body.mode-work .trend-up {
+    color: green;
+    text-align: right;
+    font-weight: bold;
+}
+
+body.mode-work .trend-steady {
+    color: #555;
+    text-align: right;
+    font-weight: bold;
+}
+
+body.mode-work .trend-down {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* LIVE FEED (Science & Tech Wire) */
+body.mode-work .live-feed {
+    background: transparent;
+    border-top: 3px double var(--border-color);
+    border-bottom: 3px double var(--border-color);
+    border-left: none;
+    border-right: none;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+
+body.mode-work .wire-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+body.mode-work .wire-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+body.mode-work .wire-meta {
+    font-family: 'Courier New', Courier, monospace;
+    /* Teletype look */
+    font-size: 0.75rem;
+    color: #444;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.5px;
+}
+
+body.mode-work .wire-headline {
+    font-family: var(--header-font);
+    /* Match main headers */
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+body.mode-work .wire-headline a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+body.mode-work .wire-headline a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+body.mode-work .loading-text,
+.error-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* ACADEMIC ARCHIVES */
+body.mode-work .archive-item {
+    margin-bottom: 1rem;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 0.5rem;
+}
+
+body.mode-work .archive-date {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    color: #666;
+}
+
+body.mode-work .archive-item h4 {
+    font-family: var(--header-font);
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+body.mode-work .archive-item p {
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+body.mode-work .archive-item .note {
+    font-style: italic;
+    color: #555;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+/* PLAYLIST */
+body.mode-fun .playlist {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+body.mode-fun .playlist li {
+    margin-bottom: 1.5rem;
+}
+
+body.mode-fun .playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 12px;
+    transition: background 0.3s ease;
+}
+
+body.mode-fun .playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.mode-fun .album-art {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.mode-fun .song-info {
+    display: flex;
+    flex-direction: column;
+}
+
+body.mode-fun .song-link {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--on-surface);
+    text-decoration: none;
+    margin-bottom: 0.2rem;
+    transition: color 0.3s ease;
+}
+
+body.mode-fun .song-link:hover {
+    color: var(--primary-color);
+}
+
+body.mode-fun .artist {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* MODAL */
+
+
+.modal-content h3 {
+    font-family: var(--header-font);
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.modal-content .btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: var(--on-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.modal-content .btn:hover {
+    background: var(--primary-dark);
+}
+
+/* PUBLICATIONS LIST */
+body.mode-work .pub-list {
+    list-style: none;
+    padding: 0;
+}
+
+body.mode-work .pub-list li {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+body.mode-work .pub-source {
+    color: #666;
+    font-style: italic;
+}
+
+body.mode-work .pub-link {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+body.mode-work .pub-link:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    text-decoration: none;
+}
+
+/* CLASSIFIEDS / SERVICES */
+body.mode-work .classifieds {
+    border: 2px dashed #999;
+    /* Dashed border for classifieds look */
+    padding: 1rem;
+    background: #fffdf5 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    /* Slightly aged paper */
+    font-size: 0.9rem;
+    box-shadow: none;
+}
+
+body.mode-work .classifieds h3 {
+    font-family: 'Courier New', Courier, monospace;
+    /* Monospace for classifieds header */
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 2px dashed #999;
+    padding-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+body.mode-work .service-ad {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted #ccc;
+}
+
+body.mode-work .service-ad strong {
+    display: block;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+body.mode-work .service-ad p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* CONTACT CARD */
+body.mode-work .contact-card {
+    margin-top: 2rem;
+    border: 4px double var(--text-color);
+    /* Heavy styling */
+    outline: 1px solid var(--text-color);
+    /* Extra outline */
+    outline-offset: 3px;
+    padding: 1.5rem;
+    text-align: center;
+    background: #fffdf5 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+}
+
+body.mode-work .contact-card h3 a {
+    font-family: var(--header-font);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 3px solid var(--text-color);
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+/* =========================================
+   NEWSPAPER SUB-PAGE & ANIMATIONS
+   ========================================= */
+
+/* 3D FLIP ANIMATIONS */
+@keyframes flipOut {
+    0% {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateY(-90deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flipIn {
+    0% {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}
+
+body.animate-flip-out {
+    animation: flipOut 0.6s ease-in forwards;
+    transform-origin: left center;
+}
+
+body.animate-flip-in {
+    animation: flipIn 0.6s ease-out forwards;
+    transform-origin: left center;
+}
+
+/* ARTICLE PAGE SPECIFICS */
+body.article-page {
+    /* Inherit cream background from mode-work */
+    color: #2c2c2c;
+    font-family: 'Merriweather', serif;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.article-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fffdf9 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    /* Match classifieds background */
+    padding: 3rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+/* Authentic Newspaper Header for Article */
+.paper-header {
+    text-align: center;
+    border-bottom: 3px double #000;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.paper-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    color: #000;
+}
+
+.paper-meta {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #555;
+    text-transform: uppercase;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-body {
+    column-count: 2;
+    column-gap: 2rem;
+    text-align: justify;
+}
+
+.article-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.2rem;
+    break-after: avoid;
+    color: #000;
+}
+
+.article-body p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.abstract-box {
+    background: #e8e6e1;
+    padding: 1rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    border-left: 4px solid #000;
+    column-span: all;
+}
+
+.drop-cap {
+    float: left;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    line-height: 0.8;
+    padding-right: 0.5rem;
+    padding-top: 0.1rem;
+    font-weight: 700;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #000;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    background: #000;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .article-body {
+        column-count: 1;
+    }
+
+    .paper-title {
+        font-size: 1.8rem;
+    }
+
+    .article-container {
+        padding: 1.5rem;
+    }
+}
+
+/* =========================================
+   MODE: FUN (Playful Pastel Theme)
+   ========================================= */
+body.mode-fun {
+    --bg-color: #fdf6ec;
+    /* Creamy Peach */
+    --surface-color: #ffffff;
+    --surface-variant: #fff0f5;
+    /* Lavender Blush */
+    --primary-color: #ffb7b2;
+    /* Melon */
+    --on-primary: #5e2a2a;
+    --secondary-container: #b5ead7;
+    /* Mint */
+    --text-color: #4a4a4a;
+    --border-radius: 20px;
+    --font-head: 'Outfit', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+}
+
+body.mode-fun #work-view {
+    display: none;
+}
+
+body.mode-fun #fun-view {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+body.mode-fun .view-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* HERO SECTION */
+body.mode-fun .fun-header {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+body.mode-fun .issue-date {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+body.mode-fun h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    letter-spacing: -4px;
+    line-height: 0.8;
+    text-transform: uppercase;
+}
+
+body.mode-fun .subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    display: inline-block;
+    padding-top: 0.5rem;
+}
+
+/* PARALLAX & SECTIONS */
+body.mode-fun .fun-container {
+    padding: 0;
+    /* Remove padding for full bleed */
+    max-width: 100%;
+    /* Ensure parallax overflow logic works */
+    overflow-x: hidden;
+}
+
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.parallax-layer {
+    will-change: transform;
+    transition: transform 0.1s linear;
+    /* Smooth micro-stutters if RAF is choppy, but usually 0 is better for RAF */
+    transform-style: preserve-3d;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .parallax-layer {
+        transition: none !important;
+        transform: none !important;
+        will-change: auto;
+    }
+}
+
+.parallax-section {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.content-section {
+    padding: 6rem 15vw;
+    /* Content Padding */
+    background: #fff;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 1. HERO SECTION */
+.hero-section {
+    background-color: #fff;
+    /* Clean white hero */
+    min-height: 80vh;
+}
+
+/* 2. TRAVELS SECTION (Dark Parallax) */
+.travel-section {
+    background-color: #000;
+    /* You can add a star/space image here if available */
+    color: #fff;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+}
+
+.parallax-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    font-style: italic;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.globe-container {
+    width: 100%;
+    height: 600px;
+}
+
+#globe-viz {
+    width: 100%;
+    height: 100%;
+}
+
+/* 3. HOBBIES SECTION (Textured Parallax) */
+.hobbies-section {
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+    /* Fallback Texture */
+    background-color: #f0f0f0;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Darken bg */
+    z-index: 1;
+}
+
+.hobbies-section .parallax-content {
+    color: #fff;
+}
+
+.hobbies-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.mode-fun .hobbies-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+}
+
+body.mode-fun .hobbies-list li {
+    font-size: 2rem;
+    border: 2px solid #fff;
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+body.mode-fun .hobbies-list li:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* 4. GALLERY SECTION */
+.gallery-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.photo-grid {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+}
+
+.photo-grid img {
+    height: 400px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: center;
+    transition: transform 0.3s ease;
+}
+
+.photo-grid img:hover {
+    transform: scale(1.02);
+}
+
+/* MUSIC SECTION STYLING */
+.music-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.music-section .playlist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+
+
+
+body.mode-fun h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+body.mode-fun .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fd79a8;
+    /* Pastel Pink */
+}
+
+body.mode-fun .item-game .card-icon {
+    color: #fff;
+    font-size: 4rem;
+}
+
+body.mode-fun .item-game h2 {
+    font-family: 'Press Start 2P', cursive;
+    color: #fab1a0;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 0 #000;
+    line-height: 1.4;
+}
+
+body.mode-fun .item-game p {
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+body.mode-fun .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+body.mode-fun .tag {
+    background: #ffe5e5;
+    border: 1px solid var(--primary-color);
+    color: #5e2a2a;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+body.mode-fun .playlist {
+    list-style: none;
+}
+
+body.mode-fun .playlist li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.mode-fun .song-title {
+    font-weight: bold;
+    color: #444;
+}
+
+body.mode-fun .artist {
+    opacity: 0.7;
+    color: #888;
+}
+
+body.mode-fun .action-btn {
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    color: var(--on-primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 100px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+
+body.mode-fun .action-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 183, 178, 0.5);
+}
+
+/* GAME MODAL */
+.game-modal-content {
+    background: #222;
+    width: auto;
+    max-width: 900px;
+    padding: 0;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.close-btn-game {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#game-ui {
+    padding: 1rem;
+    text-align: center;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    background: #333;
+}
+
+/* =========================================
+   NAV / TOGGLE
+   ========================================= */
+#main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 2rem;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+    /* Let clicks pass through except on interactive elements */
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    pointer-events: auto;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: none;
+    /* Hidden for now */
+}
+
+#theme-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Toggle Styles - WORK */
+body.mode-work #theme-toggle {
+    background: transparent;
+    border: 2px solid var(--text-color);
+    border-radius: 4px;
+    font-family: var(--font-head);
+    color: var(--text-color);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+body.mode-work .icon-fun {
+    display: none;
+}
+
+/* Toggle Styles - FUN */
+body.mode-fun #theme-toggle {
+    background: var(--primary-color);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 100px;
+    font-family: var(--font-head);
+    padding: 0.8rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 50;
+    /* Ensure clickable */
+    position: relative;
+}
+
+body.mode-fun .icon-work {
+    display: none;
+}
+
+body.mode-fun .label-text {
+    font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body.mode-work .newspaper-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.mode-work .main-headline {
+        font-size: 2.5rem;
+    }
+
+    body.mode-work .first-letter {
+        font-size: 3rem;
+    }
+
+    body.mode-fun .item-music {
+        grid-column: span 12;
+    }
+
+    body.mode-fun .item-quote {
+        grid-column: span 1;
+    }
+}
+
+/* CONTACT CARD */
+body.mode-work .contact-card {
+    margin-top: 2rem;
+    border: 3px double var(--text-color);
+    /* Stronger box */
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #fdfdfd;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+body.mode-work .contact-card h3 a {
+    font-family: var(--header-font);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 2px solid var(--text-color);
+}
+
+body.mode-work .contact-card h3 a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+body.mode-work .contact-card p {
+    font-family: serif;
+    font-style: italic;
+    margin: 0.8rem 0;
+    color: #444;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    /* BLUR EFFECT */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Consolidate .show and .open logic */
+.modal-overlay.show,
+.modal-overlay.open {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+.newspaper-modal {
+    background: #fdfdfd;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    border: 3px double #000;
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeInDown 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5rem;
+}
+
+.modal-header h2 {
+    font-family: var(--header-font);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #333;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1rem;
+    background: #f9f9f9;
+}
+
+.submit-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    border: 1px solid #000;
+    transition: all 0.2s;
+}
+
+.submit-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* GLOBE MODAL */
+.globe-modal-content {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    width: 95%;
+    max-width: 1200px;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.close-btn-white {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-btn-white:hover {
+    color: var(--primary-color);
+}
+
+/* MUSIC SELECTOR MODAL - MAGAZINE STYLE */
+.music-modal-content {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    /* Sharp for magazine feel */
+    text-align: center;
+    padding: 4rem;
+    width: 90%;
+    max-width: 500px;
+}
+
+.music-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.modal-album-art {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: none;
+    /* Clean look */
+    border: 1px solid #000;
+}
+
+.modal-album-art:hover {
+    transform: none;
+}
+
+.music-modal-content h2 {
+    font-family: 'Playfair Display', serif;
+    color: #000;
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.music-actions {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.streaming-btn {
+    flex: 1;
+    padding: 1.2rem;
+    border-radius: 0;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.streaming-btn.spotify {
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+}
+
+.streaming-btn.apple {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.streaming-btn:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.streaming-btn i {
+    font-size: 1.2rem;
+}
+
+/* Background Blur Class */
+body.modal-open>*:not(.modal-overlay) {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
