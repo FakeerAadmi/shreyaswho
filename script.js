@@ -378,6 +378,8 @@ function updatePages(index) {
 window.addEventListener('wheel', (e) => {
     if (!document.body.classList.contains('mode-fun')) return;
 
+    e.preventDefault(); // 🚫 stop normal scroll
+
     if (e.deltaY > 0 && currentPage < pages.length - 1) {
         currentPage++;
     } else if (e.deltaY < 0 && currentPage > 0) {
@@ -385,7 +387,8 @@ window.addEventListener('wheel', (e) => {
     }
 
     updatePages(currentPage);
-}, { passive: true });
+}, { passive: false });
+
 
 updatePages(0);
 

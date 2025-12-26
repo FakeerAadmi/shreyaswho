@@ -1603,3 +1603,11 @@ body.modal-open>*:not(.modal-overlay) {
 .mag-page.previous {
     transform: translateX(-100%);
 }
+
+/* ===============================
+   FUN MODE: SCROLL LOCK
+   =============================== */
+body.mode-fun {
+    height: 100vh;
+    overflow: hidden;
+}
