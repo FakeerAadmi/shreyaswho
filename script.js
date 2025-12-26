@@ -330,12 +330,10 @@ function initParallax() {
     if (reducedMotion || isMobile) return;
 
     parallaxActive = true;
-    window.addEventListener('scroll', onParallaxScroll, { passive: true });
 }
 
 function destroyParallax() {
     parallaxActive = false;
-    window.removeEventListener('scroll', onParallaxScroll);
 
     parallaxItems.forEach(el => {
         el.style.transform = 'translate3d(0,0,0)';
@@ -375,20 +373,24 @@ function updatePages(index) {
     });
 }
 
-window.addEventListener('wheel', (e) => {
+updatePages(0);
+
+function onScrollIntent(e) {
     if (!document.body.classList.contains('mode-fun')) return;
 
-    e.preventDefault(); // 🚫 stop normal scroll
+    e.preventDefault();
 
-    if (e.deltaY > 0 && currentPage < pages.length - 1) {
+    const delta = e.deltaY || e.wheelDelta || -e.detail;
+    if (Math.abs(delta) < 20) return;
+
+    if (delta > 0 && currentPage < pages.length - 1) {
         currentPage++;
-    } else if (e.deltaY < 0 && currentPage > 0) {
+    } else if (delta < 0 && currentPage > 0) {
         currentPage--;
     }
 
     updatePages(currentPage);
-}, { passive: false });
+}
 
-
-updatePages(0);
-
+document.addEventListener('wheel', onScrollIntent, { passive: false });
+document.addEventListener('touchmove', onScrollIntent, { passive: false });
