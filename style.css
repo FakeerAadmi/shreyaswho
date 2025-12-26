@@ -1607,7 +1607,14 @@ body.modal-open>*:not(.modal-overlay) {
 /* ===============================
    FUN MODE: SCROLL LOCK
    =============================== */
+html,
+body {
+    overscroll-behavior: none;
+}
+
 body.mode-fun {
     height: 100vh;
     overflow: hidden;
+    position: fixed;
+    width: 100%;
 }
